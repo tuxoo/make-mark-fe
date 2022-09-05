@@ -1,14 +1,14 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
-import Home from "./page/Home";
 import {ToastContainer} from "react-toastify";
+import Login from "./page/Login";
 
 function App() {
     return (
         <>
             <ToastContainer/>
             <Routes>
-                <Route path='/' element={<Home/>}/>
+                <Route path='/' element={<Login/>}/>
             </Routes>
         </>
     );
