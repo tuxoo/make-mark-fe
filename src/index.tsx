@@ -16,7 +16,6 @@ const theme = extendTheme({
     }
 })
 
-
 root.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -26,4 +25,3 @@ root.render(
         </BrowserRouter>
     </Provider>
 )
-;
