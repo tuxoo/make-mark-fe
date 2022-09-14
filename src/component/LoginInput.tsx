@@ -8,11 +8,12 @@ interface LoginInputProps {
 
 const LoginInput = ({label, type}: LoginInputProps) => {
     return (
-        <FormControl p = '3'>
+        <FormControl p = '2'>
             <FormLabel>{label}</FormLabel>
             <Input
                 size='md'
                 type={type}
+                outline='tomato'
             />
         </FormControl>
     )

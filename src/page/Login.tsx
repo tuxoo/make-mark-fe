@@ -2,14 +2,15 @@ import React from "react";
 import {Box, Button, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, Text} from "@chakra-ui/react";
 import Title from "../component/Title";
 import LoginInput from "../component/LoginInput";
+import LoginButton from "../component/LoginButton";
 
 const Login = () => {
     return (
-        <Box bgGradient={'linear(to-b, yellow.200, red.200)'}>
+        <Box bgGradient={'linear(to-b, purple.200, blue.600)'}>
             <Flex minHeight='100vh' width='full' align='center' justifyContent='center'>
-                <Flex direction='column' width='360px' bgColor='white' boxShadow='xl' p={4} rounded={10}>
+                <Flex direction='column' width='480px' bgColor='white' boxShadow='xl' p={4} rounded={10} shadow='2xl'>
                     <Tabs
-                        p='2'
+                        p='5'
                         isFitted
                         variant='enclosed'
                     >
@@ -20,7 +21,7 @@ const Login = () => {
                         <TabPanels>
                             <TabPanel>
                                 <Title text={'Sign in to MakeMark'}/>
-                                <Text>
+                                <Text p='5'>
                                     Please enter your email and password
                                 </Text>
                                 <LoginInput label={'Email'} type={'email'}/>
@@ -34,25 +35,9 @@ const Login = () => {
                     <Flex
                         align='center'
                         justifyContent='center'
+                        p='5'
                     >
-                        <Box
-                            as='button'
-                            width='40'
-                            height='10'
-                            bg='blue.100'
-                            justifyContent='center'
-                            rounded='6'
-                            userSelect='none'
-                            _hover={{
-                                bg: `#B794F4`
-                            }}
-                            _active={{
-                                bg: `#B794F4`,
-                                transform: 'scale(0.95)',
-                            }}
-                        >
-                            Sign In
-                        </Box>
+                        <LoginButton text={'Sign In'}/>
                     </Flex>
                 </Flex>
             </Flex>
