@@ -21,4 +21,5 @@ const authInterceptor = (config: AxiosRequestConfig): AxiosRequestConfig => {
 };
 
 authHost.interceptors.request.use(authInterceptor);
+
 export {host, authHost};

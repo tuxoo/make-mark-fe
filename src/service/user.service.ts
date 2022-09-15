@@ -20,13 +20,15 @@ export interface LoginResponse {
     user: User,
 }
 
+const path = '/api/v1'
+
 class AuthService {
     public signIn(signInRequest: SignInRequest): AxiosPromise<LoginResponse> {
-        return host.post<LoginResponse>('api/v1/users/sign-in', signInRequest)
+        return host.post<LoginResponse>(`${path}/sign-in`, signInRequest)
     }
 
     public signUp(signUpRequest: SignUpRequest) {
-        return host.post<LoginResponse>('api/v1/users/sign-up', signUpRequest)
+        return host.post<LoginResponse>(`${path}/sign-up`, signUpRequest)
     }
 }
 

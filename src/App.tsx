@@ -4,6 +4,8 @@ import {Slide, ToastContainer} from "react-toastify";
 import Login from "./page/Login";
 import {injectStyle} from "react-toastify/dist/inject-style";
 import Marks from "./page/Marks";
+import Header from "./component/Header";
+import {Box} from "@chakra-ui/react";
 
 function App() {
     injectStyle()
@@ -15,10 +17,13 @@ function App() {
                 transition={Slide}
                 autoClose={1000}
             />
-            <Routes>
-                <Route path='/' element={<Login/>}/>
-                <Route path='/marks' element={<Marks/>}/>
-            </Routes>
+            <Box bgGradient={'linear(to-b, purple.200, blue.600)'}>
+                <Header/>
+                <Routes>
+                    <Route path='/' element={<Login/>}/>
+                    <Route path='/marks' element={<Marks/>}/>
+                </Routes>
+            </Box>
         </>
     );
 }

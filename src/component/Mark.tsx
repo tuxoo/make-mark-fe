@@ -18,16 +18,17 @@ const Mark = ({title, text, time}: MarkProps) => {
             p={4}
             rounded={10}
             shadow='2xl'
+            userSelect='none'
         >
             <Text as='b'>{title}</Text>
             <Text>{text}</Text>
-            <Flex width='full' h='full' p='1'>
-                <Flex width='80%' h='12' justifyContent='start' alignItems='center'>
+            <Flex width='full' h='full' p='1' justifyContent='space-between'>
+                <Flex width='80%' h='12' alignItems='center'>
                     <Text as='em'>
                         {time}
                     </Text>
                 </Flex>
-                <Flex width='10%' h='full' justifyContent='end'>
+                <Flex width='10%' h='full'>
                     <IconButton
                         aria-label='Edit Mark'
                         icon={<EditIcon/>}
@@ -35,7 +36,7 @@ const Mark = ({title, text, time}: MarkProps) => {
                         size='lg'
                         color='gray.500'/>
                 </Flex>
-                <Flex width='10%' h='full' justifyContent='end'>
+                <Flex width='10%' h='full'>
                     <IconButton
                         aria-label='Delete Mark'
                         icon={<DeleteIcon/>}

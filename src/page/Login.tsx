@@ -63,8 +63,8 @@ const Login = () => {
     }
 
     return (
-        <Box bgGradient={'linear(to-b, purple.200, blue.600)'}>
-            <Flex minHeight='100vh' width='full' align='center' justifyContent='center'>
+
+            <Flex minHeight='95vh' width='full' align='center' justifyContent='center'>
                 <Flex direction='column' width='480px' bgColor='white' boxShadow='xl' p={4} rounded={10} shadow='2xl'>
                     <Tabs
                         p='3'
@@ -107,7 +107,7 @@ const Login = () => {
                     </Flex>
                 </Flex>
             </Flex>
-        </Box>
+
     )
 }
 

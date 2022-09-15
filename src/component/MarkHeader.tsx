@@ -1,6 +1,6 @@
 import React from "react";
-import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex} from "@chakra-ui/react";
-import {ChevronRightIcon} from "@chakra-ui/icons";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Flex} from "@chakra-ui/react";
+import {ArrowForwardIcon, ChevronRightIcon} from "@chakra-ui/icons";
 
 interface MarkHeaderProps {
     year: number,
@@ -16,13 +16,19 @@ const MarkHeader = ({year, month, day}: MarkHeaderProps) => {
             h='full'
             justifyContent='end'
             alignContent='center'
+            userSelect='none'
         >
             <Flex
                 width='full'
                 bgColor='white'
-                p={4}
+                alignItems='center'
+                justifyContent='space-between'
+                p={2}
                 rounded={10}
                 shadow='2xl'
+                pl='4'
+                pr='4'
+                userSelect='none'
             >
                 <Breadcrumb spacing='10px' separator={<ChevronRightIcon color='gray.500'/>}>
                     <BreadcrumbItem>
@@ -35,6 +41,10 @@ const MarkHeader = ({year, month, day}: MarkHeaderProps) => {
                         <BreadcrumbLink>{day}</BreadcrumbLink>
                     </BreadcrumbItem>
                 </Breadcrumb>
+
+                <Button rightIcon={<ArrowForwardIcon />} size='lg' variant='outline'>
+                    Make
+                </Button>
             </Flex>
         </Flex>
     )

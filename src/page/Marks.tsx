@@ -17,8 +17,8 @@ import MarkHeader from "../component/MarkHeader";
 
 const Marks = () => {
     return (
-        <Box bgGradient={'linear(to-b, purple.200, blue.600)'}>
-            <Flex minHeight='100vh' width='full' align='center' justifyContent='center'>
+
+            <Flex minHeight='95vh' width='full' align='start' justifyContent='center'>
                 <Grid
                     templateRows='repeat(2, 1fr)'
                     templateColumns='repeat(2, 1fr)'
@@ -38,7 +38,7 @@ const Marks = () => {
                     </GridItem>
                 </Grid>
             </Flex>
-        </Box>
+
     )
 }
 
