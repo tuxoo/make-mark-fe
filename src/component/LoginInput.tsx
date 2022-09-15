@@ -1,19 +1,22 @@
 import React from "react";
 import {FormControl, FormLabel, Input} from "@chakra-ui/react";
+import {toCamelCase} from "../util/Utils";
 
 interface LoginInputProps {
     label: string,
-    type: string
+    type: string,
+    handle: (e: any) => void
 }
 
-const LoginInput = ({label, type}: LoginInputProps) => {
+const LoginInput = ({label, type, handle}: LoginInputProps) => {
     return (
-        <FormControl p = '2'>
+        <FormControl p='1'>
             <FormLabel>{label}</FormLabel>
             <Input
                 size='md'
                 type={type}
-                outline='tomato'
+                name={toCamelCase(label)}
+                onChange={handle}
             />
         </FormControl>
     )

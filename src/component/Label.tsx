@@ -1,26 +1,25 @@
 import React from "react";
-import {Flex, Text} from "@chakra-ui/react";
+import {Flex, Img} from "@chakra-ui/react";
 
 interface LabelProps {
-    text: string
+    path: string
 }
 
-const Title = ({text}: LabelProps) => {
+const Label = ({path}: LabelProps) => {
     return (
         <Flex
-            as='b'
             h='full'
             width='full'
-            fontSize='2xl'
-            fontFamily='bold'
             justifyContent='center'
             alignItems='center'
             userSelect='none'
             p='2'
         >
-            <Text>{text}</Text>
+            <Img
+                src={path}
+                alt=''/>
         </Flex>
     )
 }
 
-export default Title
+export default Label
