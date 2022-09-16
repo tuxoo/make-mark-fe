@@ -4,12 +4,14 @@ import {setupListeners} from "@reduxjs/toolkit/query";
 import {connectRouter, routerMiddleware} from "connected-react-router";
 import loginReducer from "./slice/user/slice";
 import marksReducer from "./slice/mark/slice";
+import {markModalReducer} from "./slice/mark-model/slice";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
     loginReducer,
     marksReducer,
+    markModalReducer,
     router: connectRouter(history)
 })
 

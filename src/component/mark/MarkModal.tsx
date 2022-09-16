@@ -13,16 +13,21 @@ import {
     ModalOverlay,
     Textarea
 } from "@chakra-ui/react";
+import {useAppDispatch, useAppSelector} from "../../hook/redux";
+import {markModalActions} from "../../store/slice/mark-model/slice";
 
 interface MarkModalProps {
     isOpen: boolean,
     onClose: () => void,
-    title?: string,
-    text?: string,
     handleAction: (o: any) => void
+    handleTitle: (e: any) => void,
+    handleText: (e: any) => void,
 }
 
-const MarkModal = ({isOpen, onClose, title, text, handleAction}: MarkModalProps) => {
+const MarkModal = ({isOpen, onClose, handleAction, handleTitle, handleText}: MarkModalProps) => {
+    const dispatch = useAppDispatch()
+    const {title, text} = useAppSelector(state => state.markModalReducer)
+
     return (
         <Modal
             isOpen={isOpen}
@@ -38,9 +43,7 @@ const MarkModal = ({isOpen, onClose, title, text, handleAction}: MarkModalProps)
                         <FormLabel>Title</FormLabel>
                         <Input
                             placeholder='Title'
-                            onChange={event => {
-                                title = event.target.value
-                            }}
+                            onChange={handleTitle}
                             value={title}
                         />
                     </FormControl>
@@ -50,9 +53,7 @@ const MarkModal = ({isOpen, onClose, title, text, handleAction}: MarkModalProps)
                         <Textarea
                             placeholder='Text'
                             resize='none'
-                            onChange={event => {
-                                text = event.target.value
-                            }}
+                            onChange={handleText}
                             value={text}
                         />
                     </FormControl>
@@ -62,6 +63,7 @@ const MarkModal = ({isOpen, onClose, title, text, handleAction}: MarkModalProps)
                     <Button
                         onClick={() => {
                             handleAction({title, text})
+                            dispatch(markModalActions.clear())
                             onClose()
                         }}
                         size='lg'

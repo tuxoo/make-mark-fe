@@ -5,7 +5,8 @@ import moment from "moment";
 import {useAppDispatch} from "../../hook/redux";
 import {deleteMark, editMark} from "../../store/slice/mark";
 import MarkModal from "./MarkModal";
-import {MarkForm, MarkSlim} from "../../service/mark.service";
+import {MarkForm} from "../../service/mark.service";
+import {markModalActions} from "../../store/slice/mark-model/slice";
 
 interface MarkProps {
     id: number,
@@ -45,7 +46,12 @@ const Mark = ({id, title, text, time}: MarkProps) => {
                     </Flex>
                     <Flex width='10%' h='full'>
                         <IconButton
-                            onClick={onOpen}
+                            onClick={() =>{
+                                dispatch(markModalActions.changeTitle(title))
+                                dispatch(markModalActions.changeText(text))
+                                onOpen()
+                            }
+                        }
                             aria-label='Edit Mark'
                             icon={<EditIcon/>}
                             bg='transparent'
@@ -54,9 +60,13 @@ const Mark = ({id, title, text, time}: MarkProps) => {
                         <MarkModal
                             isOpen={isOpen}
                             onClose={onClose}
-                            title={title}
-                            text={text}
                             handleAction={handleEdit}
+                            handleTitle={event => {
+                                dispatch(markModalActions.changeTitle(event.target.value))
+                            }}
+                            handleText={event => {
+                                dispatch(markModalActions.changeText(event.target.value))
+                            }}
                         />
                     </Flex>
                     <Flex width='10%' h='full'>

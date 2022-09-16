@@ -2,9 +2,10 @@ import React from "react";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Flex, useDisclosure} from "@chakra-ui/react";
 import {ArrowForwardIcon, ChevronRightIcon} from "@chakra-ui/icons";
 import MarkModal from "./MarkModal";
-import {useAppDispatch} from "../../hook/redux";
+import {useAppDispatch, useAppSelector} from "../../hook/redux";
 import {addMark} from "../../store/slice/mark";
 import {MarkForm} from "../../service/mark.service";
+import {markModalActions} from "../../store/slice/mark-model/slice";
 
 interface MarkHeaderProps {
     year: number,
@@ -16,6 +17,7 @@ const MarkHeader = ({year, month, day}: MarkHeaderProps) => {
     const dispatch = useAppDispatch()
 
     const {isOpen, onOpen, onClose} = useDisclosure()
+    const {title, text} = useAppSelector(state => state.markModalReducer)
 
     const handleAdd = async (mark: MarkForm) => {
         await dispatch(addMark(mark))
@@ -56,7 +58,7 @@ const MarkHeader = ({year, month, day}: MarkHeaderProps) => {
 
                 <Button
                     onClick={onOpen}
-                    rightIcon={<ArrowForwardIcon />}
+                    rightIcon={<ArrowForwardIcon/>}
                     size='lg'
                     variant='outline'
                 >
@@ -65,9 +67,13 @@ const MarkHeader = ({year, month, day}: MarkHeaderProps) => {
                 <MarkModal
                     isOpen={isOpen}
                     onClose={onClose}
-                    title=''
-                    text=''
                     handleAction={handleAdd}
+                    handleTitle={event => {
+                        dispatch(markModalActions.changeTitle(event.target.value))
+                    }}
+                    handleText={event => {
+                        dispatch(markModalActions.changeText(event.target.value))
+                    }}
                 />
             </Flex>
         </Flex>

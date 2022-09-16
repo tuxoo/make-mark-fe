@@ -25,7 +25,7 @@ class MarkService {
     }
 
     public editMark(id: number, mark: MarkForm): AxiosPromise<MarkSlim> {
-        return authHost.patch(`${path}/${id}`)
+        return authHost.patch(`${path}/${id}`, mark)
     }
 
     public deleteMark(id: number) {
