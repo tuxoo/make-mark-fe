@@ -20,7 +20,7 @@ export interface LoginResponse {
     user: User,
 }
 
-const path = '/api/v1'
+const path = '/api/v1/users'
 
 class AuthService {
     public signIn(signInRequest: SignInRequest): AxiosPromise<LoginResponse> {
