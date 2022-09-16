@@ -1,6 +1,6 @@
 import React from "react";
 import {FormControl, FormLabel, Input} from "@chakra-ui/react";
-import {toCamelCase} from "../util/Utils";
+import {toCamelCase} from "../../util/Utils";
 
 interface LoginInputProps {
     label: string,

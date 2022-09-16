@@ -1,7 +1,12 @@
 import {AxiosPromise} from "axios";
 import {authHost} from "../http/axios";
 
-export interface Mark {
+export interface MarkForm {
+    title: string,
+    text: string,
+}
+
+export interface MarkSlim {
     id: number,
     title: string,
     text: string,
@@ -11,16 +16,16 @@ export interface Mark {
 const path = '/api/v1/marks'
 
 class MarkService {
-    public addMark(mark: Mark) {
-        return authHost.post(path)
+    public addMark(mark: MarkForm) {
+        return authHost.post(path, mark)
     }
 
-    public getMarks(): AxiosPromise<Mark[]> {
-        return authHost.get(path)
+    public getMarks(year: number, month: number, day: number): AxiosPromise<MarkSlim[]> {
+        return authHost.get(path, {params: {year, month, day}})
     }
 
-    public editMark(id: number, mark: Mark): AxiosPromise<Mark> {
-        return authHost.patch<Mark>(`${path}/${id}`)
+    public editMark(id: number, mark: MarkForm): AxiosPromise<MarkSlim> {
+        return authHost.patch(`${path}/${id}`)
     }
 
     public deleteMark(id: number) {

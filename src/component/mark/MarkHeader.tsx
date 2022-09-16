@@ -1,6 +1,10 @@
 import React from "react";
-import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Flex} from "@chakra-ui/react";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Flex, useDisclosure} from "@chakra-ui/react";
 import {ArrowForwardIcon, ChevronRightIcon} from "@chakra-ui/icons";
+import MarkModal from "./MarkModal";
+import {useAppDispatch} from "../../hook/redux";
+import {addMark} from "../../store/slice/mark";
+import {MarkForm} from "../../service/mark.service";
 
 interface MarkHeaderProps {
     year: number,
@@ -9,6 +13,14 @@ interface MarkHeaderProps {
 }
 
 const MarkHeader = ({year, month, day}: MarkHeaderProps) => {
+    const dispatch = useAppDispatch()
+
+    const {isOpen, onOpen, onClose} = useDisclosure()
+
+    const handleAdd = async (mark: MarkForm) => {
+        await dispatch(addMark(mark))
+    }
+
     return (
         <Flex
             direction='column'
@@ -42,9 +54,21 @@ const MarkHeader = ({year, month, day}: MarkHeaderProps) => {
                     </BreadcrumbItem>
                 </Breadcrumb>
 
-                <Button rightIcon={<ArrowForwardIcon />} size='lg' variant='outline'>
+                <Button
+                    onClick={onOpen}
+                    rightIcon={<ArrowForwardIcon />}
+                    size='lg'
+                    variant='outline'
+                >
                     Make
                 </Button>
+                <MarkModal
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    title=''
+                    text=''
+                    handleAction={handleAdd}
+                />
             </Flex>
         </Flex>
     )

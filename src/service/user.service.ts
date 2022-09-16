@@ -1,5 +1,5 @@
 import {AxiosPromise} from 'axios';
-import {host} from "../http/axios";
+import {authHost, host} from "../http/axios";
 import {User} from "../model/user.model";
 
 export interface SignUpRequest {
@@ -28,7 +28,11 @@ class AuthService {
     }
 
     public signUp(signUpRequest: SignUpRequest) {
-        return host.post<LoginResponse>(`${path}/sign-up`, signUpRequest)
+        return host.post(`${path}/sign-up`, signUpRequest)
+    }
+
+    public getProfile(): AxiosPromise<User> {
+        return authHost.get(`${path}/profile`)
     }
 }
 

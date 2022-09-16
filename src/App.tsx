@@ -17,7 +17,7 @@ function App() {
                 transition={Slide}
                 autoClose={1000}
             />
-            <Box bgGradient={'linear(to-b, purple.200, blue.600)'}>
+            <Box bgGradient={'linear(to-b, purple.200, blue.600)'} minWidth='1000px'>
                 <Header/>
                 <Routes>
                     <Route path='/' element={<Login/>}/>

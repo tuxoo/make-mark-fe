@@ -1,14 +1,46 @@
-import React from "react";
-import {Button, Flex, Tag, TagLabel} from "@chakra-ui/react";
+import React, {useEffect, useState} from "react";
+import {Button, Flex, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
+import {useNavigate} from "react-router-dom";
+import {ChevronDownIcon} from "@chakra-ui/icons";
+import {useAppDispatch, useAppSelector} from "../hook/redux";
+import {getProfile} from "../store/slice/user";
 
 const Header = () => {
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+    const {user} = useAppSelector(state => state.loginReducer)
+
+    useEffect(() => {
+        dispatch(getProfile())
+    }, [dispatch])
+
     return (
-        <Flex minHeight='5vh' width='full' align='center' justifyContent='end' pr='5'>
+        <Flex minHeight='10vh' width='full' align='start' justifyContent='end' p='5'>
             {/*    <Flex direction='column' width='480px' bgColor='white' boxShadow='xl' p={4} rounded={10} shadow='2xl'>*/}
 
-            <Button size='lg' bg='white'>
-                Logout
-            </Button>
+            {/*<Button*/}
+            {/*    size='lg'*/}
+            {/*    bg='white'*/}
+            {/*    onClick={() => {*/}
+            {/*        localStorageService.removeAccessToken()*/}
+            {/*        navigate('/') // TODO: improved logout*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*    Logout*/}
+            {/*</Button>*/}
+
+            <Menu>
+                <MenuButton
+                    as={Button}
+                    rightIcon={<ChevronDownIcon/>}
+                    bg='white'
+                >
+                    {`${user?.firstName} ${user?.lastName}`}
+                </MenuButton>
+                <MenuList>
+                    <MenuItem>Logout</MenuItem>
+                </MenuList>
+            </Menu>
 
             {/*<Tag height='10' bg='transparent'>*/}
             {/*    <TagLabel fontSize='lg'>Eugene Krivtsov</TagLabel>*/}

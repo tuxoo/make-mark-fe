@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Flex, Tab, TabList, TabPanel, TabPanels, Tabs} from "@chakra-ui/react";
-import LoginInput from "../component/LoginInput";
-import LoginButton from "../component/LoginButton";
+import LoginInput from "../component/login/LoginInput";
+import LoginButton from "../component/login/LoginButton";
 import Label from "../component/Label";
-import LoginText from "../component/LoginText";
+import LoginText from "../component/login/LoginText";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../hook/redux";

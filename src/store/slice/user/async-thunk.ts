@@ -6,8 +6,9 @@ import {localStorageService} from "../../../service/local-storage.service";
 
 export const SIGN_IN_ACTION = 'users/sign-in'
 export const SIGN_UP_ACTION = 'users/sign-up'
+export const GET_PROFILE_ACTION = 'users/profile'
 
-export const signIn = createAsyncThunk<User, SignInRequest, { rejectValue: ApiError }>(
+const signIn = createAsyncThunk<User, SignInRequest, { rejectValue: ApiError }>(
     SIGN_IN_ACTION,
     async (request: SignInRequest, thunkApi) => {
         try {
@@ -21,7 +22,7 @@ export const signIn = createAsyncThunk<User, SignInRequest, { rejectValue: ApiEr
     }
 )
 
-export const signUp = createAsyncThunk<void, SignUpRequest, { rejectValue: ApiError }>(
+const signUp = createAsyncThunk<void, SignUpRequest, { rejectValue: ApiError }>(
     SIGN_UP_ACTION,
     async (request: SignUpRequest, thunkApi) => {
         try {
@@ -32,3 +33,18 @@ export const signUp = createAsyncThunk<void, SignUpRequest, { rejectValue: ApiEr
         }
     }
 )
+
+const getProfile = createAsyncThunk<User, void, { rejectValue: ApiError }>(
+    GET_PROFILE_ACTION,
+    async (_, thunkApi) => {
+        try {
+            const response = await authService.getProfile()
+            return response.data
+        } catch (error: any) {
+            const err: ApiError = {message: error.response.data}
+            return thunkApi.rejectWithValue(err)
+        }
+    }
+)
+
+export {signIn, signUp, getProfile}

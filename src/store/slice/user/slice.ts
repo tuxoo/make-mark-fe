@@ -2,7 +2,7 @@ import {ApiError} from "../../../model/error.model";
 import {User} from "../../../model/user.model";
 import {createSlice} from "@reduxjs/toolkit";
 import {toast} from "react-toastify";
-import {signIn, signUp} from "./async-thunk";
+import {getProfile, signIn, signUp} from "./async-thunk";
 
 interface UserSliceState {
     isAuthenticated: boolean
@@ -40,7 +40,7 @@ const loginSlice = createSlice({
             state.error = payload;
             toast.error("Something went wrong")
         })
-        builder.addCase(signUp.pending, (state) => {
+        builder.addCase(signUp.pending, state => {
             state.isLoading = true;
         })
         builder.addCase(signUp.fulfilled, state => {
@@ -52,6 +52,17 @@ const loginSlice = createSlice({
             state.isLoading = false;
             state.error = payload;
             toast.error("Something went wrong")
+        })
+        builder.addCase(getProfile.pending, state => {
+            state.isLoading = true
+        })
+        builder.addCase(getProfile.fulfilled,(state, {payload}) => {
+            state.user = payload;
+            state.isLoading = true;
+        })
+        builder.addCase(getProfile.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload;
         })
     }
 })
