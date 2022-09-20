@@ -18,7 +18,6 @@ const MarkHeader = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
 
     useEffect(() => {
-        // console.log(year, month, day)
         dispatch(fetchMarks(new Date(year, month, day)))
     }, [year, month, day])
 
@@ -58,7 +57,7 @@ const MarkHeader = () => {
                         size='lg'
                         value={MONTH_ITEMS.find(m => m.order === month)!!.name}
                         onChange={event => {
-                            dispatch(dailyActions.setMonth(event.target.value))
+                            dispatch(dailyActions.setMonth(MONTH_ITEMS.find(m => m.name === event.target.value)!!.order))
                         }}
                     > {
                         MONTH_ITEMS.map(month => (

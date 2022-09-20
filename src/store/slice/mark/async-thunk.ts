@@ -36,7 +36,6 @@ const fetchMarks = createAsyncThunk<MarkSlim[], Date, { rejectValue: ApiError }>
     GET_MARKS_ACTION,
     async (date, thunkApi) => {
         try {
-            console.log(date.getFullYear(), date.getMonth(), date.getDate())
             const response = await markService.getMarks(date.getFullYear(), date.getMonth() + 1, date.getDate())
             return response.data
         } catch (error: any) {
