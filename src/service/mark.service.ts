@@ -7,7 +7,7 @@ export interface MarkForm {
 }
 
 export interface MarkSlim {
-    id: number,
+    id: string,
     title: string,
     text: string,
     createdAt: string
@@ -24,11 +24,11 @@ class MarkService {
         return authHost.get(path, {params: {year, month, day}})
     }
 
-    public editMark(id: number, mark: MarkForm): AxiosPromise<MarkSlim> {
+    public editMark(id: string, mark: MarkForm): AxiosPromise<MarkSlim> {
         return authHost.patch(`${path}/${id}`, mark)
     }
 
-    public deleteMark(id: number) {
+    public deleteMark(id: string) {
         return authHost.delete(`${path}/${id}`)
     }
 }

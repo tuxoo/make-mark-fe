@@ -6,6 +6,7 @@ import {injectStyle} from "react-toastify/dist/inject-style";
 import Marks from "./page/Marks";
 import Header from "./component/Header";
 import {Box} from "@chakra-ui/react";
+import Calendar from "./page/Calendar";
 
 function App() {
     injectStyle()
@@ -21,6 +22,7 @@ function App() {
                 <Header/>
                 <Routes>
                     <Route path='/' element={<Login/>}/>
+                    <Route path='/calendar' element={<Calendar/>}/>
                     <Route path='/marks' element={<Marks/>}/>
                 </Routes>
             </Box>

@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {useAppDispatch, useAppSelector} from "../hook/redux";
 import {getProfile} from "../store/slice/user";
+import {fetchMarks} from "../store/slice/mark";
 
 const Header = () => {
     const navigate = useNavigate()
@@ -38,6 +39,12 @@ const Header = () => {
                     {`${user?.firstName} ${user?.lastName}`}
                 </MenuButton>
                 <MenuList>
+                    <MenuItem
+                        onClick={() => navigate('/calendar')}
+                    >Calendar</MenuItem>
+                    <MenuItem
+                        onClick={() => navigate('/marks')}
+                    >Daily</MenuItem>
                     <MenuItem>Logout</MenuItem>
                 </MenuList>
             </Menu>

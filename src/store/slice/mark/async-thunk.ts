@@ -20,7 +20,7 @@ const addMark = createAsyncThunk<MarkSlim, MarkForm, { rejectValue: ApiError }>(
     }
 )
 
-const editMark = createAsyncThunk<MarkSlim, { id: number, mark: MarkForm }, { rejectValue: ApiError }>(
+const editMark = createAsyncThunk<MarkSlim, { id: string, mark: MarkForm }, { rejectValue: ApiError }>(
     EDIT_MARK_ACTION,
     async ({id, mark}, thunkApi) => {
         try {
@@ -36,7 +36,8 @@ const fetchMarks = createAsyncThunk<MarkSlim[], Date, { rejectValue: ApiError }>
     GET_MARKS_ACTION,
     async (date, thunkApi) => {
         try {
-            const response = await markService.getMarks(date.getFullYear(), date.getMonth() + 1, date.getUTCDate())
+            console.log(date.getFullYear(), date.getMonth(), date.getDate())
+            const response = await markService.getMarks(date.getFullYear(), date.getMonth() + 1, date.getDate())
             return response.data
         } catch (error: any) {
             const err: ApiError = {message: error.response.datat}
@@ -44,9 +45,9 @@ const fetchMarks = createAsyncThunk<MarkSlim[], Date, { rejectValue: ApiError }>
         }
     });
 
-const deleteMark = createAsyncThunk<number, number, { rejectValue: ApiError }>(
+const deleteMark = createAsyncThunk<string, string, { rejectValue: ApiError }>(
     DELETE_MARK_ACTION,
-    async (id: number, thunkApi) => {
+    async (id: string, thunkApi) => {
         try {
             const response = await markService.deleteMark(id)
             return response.data

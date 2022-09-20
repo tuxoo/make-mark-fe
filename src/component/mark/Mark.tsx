@@ -9,7 +9,7 @@ import {MarkForm} from "../../service/mark.service";
 import {markModalActions} from "../../store/slice/mark-model/slice";
 
 interface MarkProps {
-    id: number,
+    id: string,
     title: string,
     text: string,
     time: string

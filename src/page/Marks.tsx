@@ -16,7 +16,7 @@ const Marks = () => {
     return (
         <Flex direction='column' minHeight='90vh' align='center' justifyContent='start'>
             <Flex width='980px' bg='transparent' alignItems='center' p='5'>
-                <MarkHeader year={2022} month={'September'} day={15}/>
+                <MarkHeader/>
             </Flex>
             <Flex width='full' bg='transparent' alignItems='center' justifyContent='center'>
                 <Grid
@@ -26,9 +26,8 @@ const Marks = () => {
                 >
                     {
                         marks.map(mark => (
-                                <Mark key={mark.id} id={mark.id} title={mark.title} text={mark.text} time={mark.createdAt}/>
-                            )
-                        )
+                            <Mark key={mark.id} id={mark.id} title={mark.title} text={mark.text} time={mark.createdAt}/>
+                        ))
                     }
                 </Grid>
             </Flex>
