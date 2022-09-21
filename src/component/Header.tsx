@@ -43,8 +43,10 @@ const Header = () => {
                         onClick={() => navigate('/calendar')}
                     >Calendar</MenuItem>
                     <MenuItem
-                        onClick={() => navigate('/marks')}
-                    >Daily</MenuItem>
+                        onClick={() => navigate('/daily')}
+                    >
+                        Daily
+                    </MenuItem>
                     <MenuItem>Logout</MenuItem>
                 </MenuList>
             </Menu>

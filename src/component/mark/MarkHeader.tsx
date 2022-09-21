@@ -9,16 +9,18 @@ import {markModalActions} from "../../store/slice/mark-model/slice";
 import {dailyActions} from "../../store/slice/daily/slice";
 import {MONTH_ITEMS} from "../../model/constant/month.constant";
 import moment from "moment";
+import {fetchYears} from "../../store/slice/daily/async-thunk";
 
 
 const MarkHeader = () => {
     const dispatch = useAppDispatch()
-    const {year, month, day} = useAppSelector(state => state.dailyReducer)
+    const {year, month, day, existYears} = useAppSelector(state => state.dailyReducer)
 
     const {isOpen, onOpen, onClose} = useDisclosure()
 
     useEffect(() => {
         dispatch(fetchMarks(new Date(year, month, day)))
+        dispatch(fetchYears())
     }, [year, month, day])
 
     const handleAdd = async (mark: MarkForm) => {
@@ -49,8 +51,11 @@ const MarkHeader = () => {
                         onChange={event => {
                             dispatch(dailyActions.setYear(event.target.value))
                         }}
-                    >
-                    </Select>
+                    > {
+                        existYears.map(year => (
+                            <option value={year} key={year}>{year}</option>
+                        ))
+                    } </Select>
                 </Box>
                 <Box w='200px' p='4'>
                     <Select

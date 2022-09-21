@@ -3,10 +3,10 @@ import {Route, Routes} from "react-router-dom";
 import {Slide, ToastContainer} from "react-toastify";
 import Login from "./page/Login";
 import {injectStyle} from "react-toastify/dist/inject-style";
-import Marks from "./page/Marks";
-import Header from "./component/Header";
+import Daily from "./page/Daily";
 import {Box} from "@chakra-ui/react";
 import Calendar from "./page/Calendar";
+import Dashboard from "./page/Dashboard";
 
 function App() {
     injectStyle()
@@ -19,11 +19,11 @@ function App() {
                 autoClose={1000}
             />
             <Box bgGradient={'linear(to-b, purple.200, blue.600)'} minWidth='1000px'>
-                <Header/>
                 <Routes>
                     <Route path='/' element={<Login/>}/>
                     <Route path='/calendar' element={<Calendar/>}/>
-                    <Route path='/marks' element={<Marks/>}/>
+                    <Route path='/daily' element={<Daily/>}/>
+                    <Route path='/dashboard' element={<Dashboard/>}/>
                 </Routes>
             </Box>
         </>
