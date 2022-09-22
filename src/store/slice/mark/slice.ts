@@ -33,6 +33,12 @@ const marksSlice = createSlice({
     name: 'marks',
     initialState,
     reducers: {
+        setPage(state, {payload}) {
+            state.page = payload
+        },
+        setSize(state, {payload}) {
+            state.size = payload
+        },
         setSort(state, {payload}) {
             state.sort = payload
         },
@@ -86,6 +92,7 @@ const marksSlice = createSlice({
         builder.addCase(fetchMonthlyMarks.fulfilled, (state, {payload}) => {
             state.isLoading = false
             state.marks = payload.content
+            state.totalPages = payload.totalPages
             state.error = undefined
         })
         builder.addCase(fetchMonthlyMarks.rejected, (state, {payload}) => {

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import Header from "../component/Header";
-import {Flex, Table, TableCaption, TableContainer, Tbody, Tfoot, Th, Thead, Tr} from "@chakra-ui/react";
+import {Flex, Icon, Table, TableCaption, TableContainer, Tbody, Tfoot, Th, Thead, Tr} from "@chakra-ui/react";
 import {useAppDispatch, useAppSelector} from "../hook/redux";
 import {fetchMonthlyMarks, marksActions} from "../store/slice/mark";
 import MarkRow from "../component/dashboard/MarkRow";
 import SortButton from "../component/dashboard/SortButton";
+import Paging from "../component/dashboard/Paging";
 
 const Dashboard = () => {
     const dispatch = useAppDispatch()
@@ -25,10 +26,10 @@ const Dashboard = () => {
             <Flex direction='column' minHeight='90vh' align='center' justifyContent='start' pb='5'>
                 <Flex bg='transparent' alignItems='center' justifyContent='center'>
                     <TableContainer bg='white' rounded='10' p='4'>
-                        <Table size='lg'>
+                        <Table size='md'>
                             <TableCaption>
                                 <Flex width='full' height='full' justifyContent='center'>
-                                    Pagination
+                                    <Paging/>
                                 </Flex>
                             </TableCaption>
                             <Thead>
@@ -71,6 +72,8 @@ const Dashboard = () => {
                                                 setTimeSort(!timeSort)
                                             }}/>
                                         </Flex>
+                                    </Th>
+                                    <Th>
                                     </Th>
                                 </Tr>
                             </Thead>

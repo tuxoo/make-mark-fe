@@ -31,7 +31,7 @@ const MarkRow = ({id, title, createdAt}: MarkRowProps) => {
                     aria-label='Delete Mark'
                     icon={<DeleteIcon/>}
                     bg='transparent'
-                    size='lg'
+                    size='md'
                     color='blackAlpha.700'
                     _active={{
                         transform: 'scale(0.9)'
