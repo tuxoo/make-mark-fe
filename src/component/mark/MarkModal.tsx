@@ -13,21 +13,18 @@ import {
     ModalOverlay,
     Textarea
 } from "@chakra-ui/react";
-import {useAppDispatch, useAppSelector} from "../../hook/redux";
-import {markModalActions} from "../../store/slice/mark-model/slice";
 
 interface MarkModalProps {
-    isOpen: boolean,
+    title: string
+    text: string
+    isOpen: boolean
     onClose: () => void,
     handleAction: (o: any) => void
-    handleTitle: (e: any) => void,
-    handleText: (e: any) => void,
+    handleTitle: (e: any) => void
+    handleText: (e: any) => void
 }
 
-const MarkModal = ({isOpen, onClose, handleAction, handleTitle, handleText}: MarkModalProps) => {
-    const dispatch = useAppDispatch()
-    const {title, text} = useAppSelector(state => state.markModalReducer)
-
+const MarkModal = ({title, text, isOpen, onClose, handleAction, handleTitle, handleText}: MarkModalProps) => {
     return (
         <Modal
             isOpen={isOpen}
@@ -63,7 +60,6 @@ const MarkModal = ({isOpen, onClose, handleAction, handleTitle, handleText}: Mar
                     <Button
                         onClick={() => {
                             handleAction({title, text})
-                            dispatch(markModalActions.clear())
                             onClose()
                         }}
                         size='lg'

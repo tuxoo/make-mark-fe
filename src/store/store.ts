@@ -4,7 +4,6 @@ import {setupListeners} from "@reduxjs/toolkit/query";
 import {connectRouter, routerMiddleware} from "connected-react-router";
 import loginReducer from "./slice/user/slice";
 import {marksReducer} from "./slice/mark/slice";
-import {markModalReducer} from "./slice/mark-model/slice";
 import {dailyReducer} from "./slice/daily/slice";
 
 export const history = createBrowserHistory();
@@ -12,7 +11,6 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
     loginReducer,
     marksReducer,
-    markModalReducer,
     dailyReducer,
     router: connectRouter(history)
 })

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Divider, Flex, GridItem, IconButton, Text, useDisclosure} from "@chakra-ui/react";
 import {DeleteIcon, EditIcon} from "@chakra-ui/icons";
 import moment from "moment";
@@ -6,7 +6,6 @@ import {useAppDispatch} from "../../hook/redux";
 import {deleteMark, editMark} from "../../store/slice/mark";
 import MarkModal from "./MarkModal";
 import {MarkForm} from "../../service/mark.service";
-import {markModalActions} from "../../store/slice/mark-model/slice";
 
 interface MarkProps {
     id: string,
@@ -18,6 +17,8 @@ interface MarkProps {
 const Mark = ({id, title, text, time}: MarkProps) => {
     const dispatch = useAppDispatch()
     const {isOpen, onOpen, onClose} = useDisclosure()
+    const [newTitle, setNewTitle] = useState(title)
+    const [newText, setNewText] = useState(text)
 
     const handleEdit = async (mark: MarkForm) => {
         await dispatch(editMark({id, mark}))
@@ -46,26 +47,28 @@ const Mark = ({id, title, text, time}: MarkProps) => {
                     </Flex>
                     <Flex width='10%' h='full'>
                         <IconButton
-                            onClick={() =>{
-                                dispatch(markModalActions.changeTitle(title))
-                                dispatch(markModalActions.changeText(text))
+                            onClick={() => {
+                                setNewTitle(title)
+                                setNewText(text)
                                 onOpen()
                             }
-                        }
+                            }
                             aria-label='Edit Mark'
                             icon={<EditIcon/>}
                             bg='transparent'
                             size='lg'
                             color='gray.500'/>
                         <MarkModal
+                            title={newTitle}
+                            text={newText}
                             isOpen={isOpen}
                             onClose={onClose}
                             handleAction={handleEdit}
                             handleTitle={event => {
-                                dispatch(markModalActions.changeTitle(event.target.value))
+                                setNewTitle(event.target.value)
                             }}
                             handleText={event => {
-                                dispatch(markModalActions.changeText(event.target.value))
+                                setNewText(event.target.value)
                             }}
                         />
                     </Flex>

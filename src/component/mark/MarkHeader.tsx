@@ -1,11 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Box, Button, Flex, Select, Spacer, useDisclosure} from "@chakra-ui/react";
 import {ArrowForwardIcon} from "@chakra-ui/icons";
 import MarkModal from "./MarkModal";
 import {useAppDispatch, useAppSelector} from "../../hook/redux";
 import {addMark, fetchDailyMarks} from "../../store/slice/mark";
 import {MarkForm} from "../../service/mark.service";
-import {markModalActions} from "../../store/slice/mark-model/slice";
 import {dailyActions} from "../../store/slice/daily/slice";
 import {MONTH_ITEMS} from "../../model/constant/month.constant";
 import moment from "moment";
@@ -15,6 +14,9 @@ import {fetchYears} from "../../store/slice/daily/async-thunk";
 const MarkHeader = () => {
     const dispatch = useAppDispatch()
     const {year, month, day, existYears} = useAppSelector(state => state.dailyReducer)
+
+    const [title, setTitle] = useState('')
+    const [text, setText] = useState('')
 
     const {isOpen, onOpen, onClose} = useDisclosure()
 
@@ -97,14 +99,20 @@ const MarkHeader = () => {
                         Make
                     </Button>
                     <MarkModal
+                        title={title}
+                        text={text}
                         isOpen={isOpen}
-                        onClose={onClose}
+                        onClose={() => {
+                            setTitle('')
+                            setText('')
+                            onClose()
+                        }}
                         handleAction={handleAdd}
                         handleTitle={event => {
-                            dispatch(markModalActions.changeTitle(event.target.value))
+                            setTitle(event.target.value)
                         }}
                         handleText={event => {
-                            dispatch(markModalActions.changeText(event.target.value))
+                            setText(event.target.value)
                         }}
                     />
                 </Box>
