@@ -5,6 +5,7 @@ import {ChevronDownIcon} from "@chakra-ui/icons";
 import {useAppDispatch, useAppSelector} from "../hook/redux";
 import {getProfile} from "../store/slice/user";
 import {fetchDailyMarks} from "../store/slice/mark";
+import {localStorageService} from "../service/local-storage.service";
 
 const Header = () => {
     const navigate = useNavigate()
@@ -17,19 +18,6 @@ const Header = () => {
 
     return (
         <Flex minHeight='10vh' width='full' align='start' justifyContent='end' p='5'>
-            {/*    <Flex direction='column' width='480px' bgColor='white' boxShadow='xl' p={4} rounded={10} shadow='2xl'>*/}
-
-            {/*<Button*/}
-            {/*    size='lg'*/}
-            {/*    bg='white'*/}
-            {/*    onClick={() => {*/}
-            {/*        localStorageService.removeAccessToken()*/}
-            {/*        navigate('/') // TODO: improved logout*/}
-            {/*    }}*/}
-            {/*>*/}
-            {/*    Logout*/}
-            {/*</Button>*/}
-
             <Menu>
                 <MenuButton
                     as={Button}
@@ -47,7 +35,13 @@ const Header = () => {
                     >
                         Daily
                     </MenuItem>
-                    <MenuItem>Logout</MenuItem>
+                    <MenuItem
+                        onClick={() => {
+                            localStorageService.removeAccessToken()
+                            navigate('/')
+                        }}
+                    >
+                        Logout</MenuItem>
                 </MenuList>
             </Menu>
 

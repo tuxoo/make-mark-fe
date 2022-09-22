@@ -7,6 +7,7 @@ import Daily from "./page/Daily";
 import {Box} from "@chakra-ui/react";
 import Calendar from "./page/Calendar";
 import Dashboard from "./page/Dashboard";
+import PrivateRoute from "./component/PrivateRoute";
 
 function App() {
     injectStyle()
@@ -21,9 +22,27 @@ function App() {
             <Box bgGradient={'linear(to-b, purple.200, blue.600)'} minWidth='1000px'>
                 <Routes>
                     <Route path='/' element={<Login/>}/>
-                    <Route path='/calendar' element={<Calendar/>}/>
-                    <Route path='/daily' element={<Daily/>}/>
-                    <Route path='/dashboard' element={<Dashboard/>}/>
+                    <Route
+                        path='/calendar'
+                        element={
+                            <PrivateRoute>
+                                <Calendar/>
+                            </PrivateRoute>
+                        }/>
+                    <Route
+                        path='/daily'
+                        element={
+                            <PrivateRoute>
+                                <Daily/>
+                            </PrivateRoute>
+                        }/>
+                    <Route
+                        path='/dashboard'
+                        element={
+                            <PrivateRoute>
+                                <Dashboard/>
+                            </PrivateRoute>
+                        }/>
                 </Routes>
             </Box>
         </>
