@@ -3,7 +3,7 @@ import {Box, Button, Flex, Select, Spacer, useDisclosure} from "@chakra-ui/react
 import {ArrowForwardIcon} from "@chakra-ui/icons";
 import MarkModal from "./MarkModal";
 import {useAppDispatch, useAppSelector} from "../../hook/redux";
-import {addMark, fetchMarks} from "../../store/slice/mark";
+import {addMark, fetchDailyMarks} from "../../store/slice/mark";
 import {MarkForm} from "../../service/mark.service";
 import {markModalActions} from "../../store/slice/mark-model/slice";
 import {dailyActions} from "../../store/slice/daily/slice";
@@ -19,12 +19,13 @@ const MarkHeader = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
 
     useEffect(() => {
-        dispatch(fetchMarks(new Date(year, month, day)))
+        dispatch(fetchDailyMarks({year, month, day}))
         dispatch(fetchYears())
     }, [year, month, day])
 
     const handleAdd = async (mark: MarkForm) => {
         await dispatch(addMark(mark))
+        await dispatch(fetchDailyMarks({year, month, day}))
     }
 
     return (
@@ -36,7 +37,7 @@ const MarkHeader = () => {
             alignContent='center'
             userSelect='none'
             bg='white'
-            rounded={10}
+            rounded='10'
         >
             <Flex
                 width='full'

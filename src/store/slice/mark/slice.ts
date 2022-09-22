@@ -1,16 +1,30 @@
 import {MarkSlim} from "../../../service/mark.service";
 import {ApiError} from "../../../model/error.model";
 import {createSlice} from "@reduxjs/toolkit";
-import {addMark, deleteMark, editMark, fetchMarks} from "./async-thunk";
+import {addMark, deleteMark, editMark, fetchDailyMarks, fetchMonthlyMarks} from "./async-thunk";
 
 interface MarkSliceState {
     marks: MarkSlim[]
+    totalPages: number
+    page: number
+    size: number
+    sort: string
+    sortBy: 'desc' | 'asc'
+    number: number
+    numberOfElements: number
     error?: ApiError
     isLoading: boolean
 }
 
 const initialState: MarkSliceState = {
     marks: [],
+    totalPages: 1,
+    page: 0,
+    size: 20,
+    sort: 'id',
+    sortBy: 'desc',
+    number: 0,
+    numberOfElements: 0,
     error: undefined,
     isLoading: false,
 }
@@ -18,7 +32,14 @@ const initialState: MarkSliceState = {
 const marksSlice = createSlice({
     name: 'marks',
     initialState,
-    reducers: {},
+    reducers: {
+        setSort(state, {payload}) {
+            state.sort = payload
+        },
+        setSortBy(state, {payload}) {
+            state.sortBy = payload
+        }
+    },
     extraReducers: builder => {
         builder.addCase(addMark.pending, state => {
             state.isLoading = true
@@ -46,15 +67,28 @@ const marksSlice = createSlice({
             state.isLoading = false
             state.error = payload
         })
-        builder.addCase(fetchMarks.pending, state => {
+        builder.addCase(fetchDailyMarks.pending, state => {
             state.isLoading = true
         })
-        builder.addCase(fetchMarks.fulfilled, (state, {payload}) => {
+        builder.addCase(fetchDailyMarks.fulfilled, (state, {payload}) => {
             state.isLoading = false
             state.marks = payload
             state.error = undefined
         })
-        builder.addCase(fetchMarks.rejected, (state, {payload}) => {
+        builder.addCase(fetchDailyMarks.rejected, (state, {payload}) => {
+            state.isLoading = false
+            state.marks = []
+            state.error = payload
+        })
+        builder.addCase(fetchMonthlyMarks.pending, state => {
+            state.isLoading = true
+        })
+        builder.addCase(fetchMonthlyMarks.fulfilled, (state, {payload}) => {
+            state.isLoading = false
+            state.marks = payload.content
+            state.error = undefined
+        })
+        builder.addCase(fetchMonthlyMarks.rejected, (state, {payload}) => {
             state.isLoading = false
             state.marks = []
             state.error = payload
@@ -74,5 +108,5 @@ const marksSlice = createSlice({
     }
 })
 
-const marksReducer = marksSlice.reducer
-export default marksReducer
+export const marksActions = marksSlice.actions
+export const marksReducer = marksSlice.reducer

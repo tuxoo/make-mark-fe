@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {useAppDispatch, useAppSelector} from "../hook/redux";
 import {getProfile} from "../store/slice/user";
-import {fetchMarks} from "../store/slice/mark";
+import {fetchDailyMarks} from "../store/slice/mark";
 
 const Header = () => {
     const navigate = useNavigate()

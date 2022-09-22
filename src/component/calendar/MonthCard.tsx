@@ -13,7 +13,6 @@ interface MarkProps {
 const MonthCard = ({order, name, season}: MarkProps) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const {year, month} = useAppSelector(state => state.dailyReducer)
 
     return (
         <GridItem colSpan={1} w='full' h='full' bg='transparent'>

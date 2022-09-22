@@ -3,15 +3,16 @@ import {Flex, Grid} from "@chakra-ui/react";
 import Mark from "../component/mark/Mark";
 import MarkHeader from "../component/mark/MarkHeader";
 import {useAppDispatch, useAppSelector} from "../hook/redux";
-import {fetchMarks} from "../store/slice/mark";
+import {fetchDailyMarks} from "../store/slice/mark";
 import Header from "../component/Header";
 
 const Daily = () => {
     const dispatch = useAppDispatch()
     const {marks} = useAppSelector(state => state.marksReducer)
+    const {year, month, day} = useAppSelector(state => state.dailyReducer)
 
     useEffect(() => {
-        dispatch(fetchMarks(new Date()))
+        dispatch(fetchDailyMarks({year, month, day}))
     }, [dispatch])
 
     return (

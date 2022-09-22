@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Box, Flex, Select} from "@chakra-ui/react";
 import {dailyActions} from "../../store/slice/daily/slice";
 import {useAppDispatch, useAppSelector} from "../../hook/redux";
+import {fetchDailyMarks} from "../../store/slice/mark";
+import {fetchYears} from "../../store/slice/daily/async-thunk";
 
 const YearSelector = () => {
     const dispatch = useAppDispatch()
     const {year, existYears} = useAppSelector(state => state.dailyReducer)
+
+    useEffect(() => {
+        dispatch(fetchYears())
+    }, [])
 
     return (
         <Flex
