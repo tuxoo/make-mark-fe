@@ -68,7 +68,6 @@ const Login = () => {
     useEffect(() => {
         if (isRegistered) {
             toast.success("User Register Successfully");
-            navigate('/') // TODO: re render / page
         }
     }, [isRegistered])
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Header from "../component/Header";
-import {Flex, Icon, Table, TableCaption, TableContainer, Tbody, Tfoot, Th, Thead, Tr} from "@chakra-ui/react";
+import {Flex, Table, TableCaption, TableContainer, Tbody, Tfoot, Th, Thead, Tr} from "@chakra-ui/react";
 import {useAppDispatch, useAppSelector} from "../hook/redux";
 import {fetchMonthlyMarks, marksActions} from "../store/slice/mark";
 import MarkRow from "../component/dashboard/MarkRow";
@@ -16,7 +16,6 @@ const Dashboard = () => {
     const [timeSort, setTimeSort] = useState(false)
 
     useEffect(() => {
-        console.log(sort, sortBy)
         dispatch(fetchMonthlyMarks({year, month, page, size, sort, sortBy}))
     }, [daySort, timeSort])
 

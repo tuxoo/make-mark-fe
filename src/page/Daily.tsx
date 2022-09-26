@@ -30,7 +30,10 @@ const Daily = () => {
                     >
                         {
                             marks.map(mark => (
-                                <Mark key={mark.id} id={mark.id} title={mark.title} text={mark.text}
+                                <Mark key={mark.id}
+                                      id={mark.id}
+                                      title={mark.title}
+                                      text={mark.text}
                                       time={mark.createdAt}/>
                             ))
                         }
